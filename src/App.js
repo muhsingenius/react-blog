@@ -24,11 +24,25 @@ function App() {
     localStorage.setItem('blogApp.posts', JSON.stringify(posts))
   }, [posts])
 
+  function handleUpVote(id){
+    const newPost= [...posts]
+    const post = newPost.find(post => post.id === id)
+    post.upVotes = post.upVotes + 1
+    setPosts(newPost)
+  }
+
+  function handleDownVote(id){
+    const newPost= [...posts]
+    const post = newPost.find(post => post.id === id)
+    post.downVotes = post.downVotes + 1
+    setPosts(newPost)
+  }
+  
   function handleAddPost(e){
     const title = postTitleRef.current.value
     const content = postContentRef.current.value
     setPosts(prevPosts => {
-      return [...prevPosts, {id:uuid(), title: title, content:content, date: Date(), author:'Muhsin'}]
+      return [...prevPosts, {id:uuid(), title: title, content:content, date: Date().toString(), author:'Default', upVotes:0, downVotes:0}]
     })
 
   }
@@ -48,7 +62,7 @@ function App() {
               </div>
               <button className="btn btn-primary" onClick={handleAddPost}>Submit</button>
           </form>
-      <BlogPosts posts={posts} />
+      <BlogPosts posts={posts} handleUp = {handleUpVote} handleDown = {handleDownVote}/>
       
     </div>
   )
