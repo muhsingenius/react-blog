@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import BlogPosts from './BlogPosts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './NavBar';
+import UserLogin from './UserLogin';
 import uuid from 'react-uuid'
+import UserSignup from './UserSignup';
 
 const formStyle = {
   width: '50%',
@@ -53,24 +56,33 @@ function App() {
   }
 
   return (
-    <div>
-      <NavBar />
-      <form style={formStyle}>
-          <h3>Add Post</h3>
-              <div className="form-group">
-                  <label>Title</label>
-                  <input type="text" className="form-control" ref={postTitleRef} />
-              </div>
-              <div className="form-group">
-                  <label>Post Contnet</label>
-                  <textarea className="form-control" col="10" rows="5" ref={postContentRef}></textarea>
-              </div>
-              <button className="btn btn-primary" onClick={handleAddPost}>Submit</button>
-          </form>
-          <h2 style={{textAlign: 'center'}}>Blog Posts</h2>
-      <BlogPosts posts={posts} handleUp = {handleUpVote} handleDown = {handleDownVote} deletePost = {handleDelete} />
-      
-    </div>
+    <Router>
+      <div>
+        <NavBar />
+        <Route exact path="/" render={props => (
+          <React.Fragment>
+            <form style={formStyle}>
+              <h3>Add Post</h3>
+                <div className="form-group">
+                    <label>Title</label>
+                    <input type="text" className="form-control" ref={postTitleRef} />
+                </div>
+                <div className="form-group">
+                    <label>Post Contnet</label>
+                    <textarea className="form-control" col="10" rows="5" ref={postContentRef}></textarea>
+                </div>
+                <button className="btn btn-primary" onClick={handleAddPost}>Submit</button>
+            </form>
+            <h2 style={{textAlign: 'center'}}>Blog Posts</h2>
+            <BlogPosts posts={posts} handleUp = {handleUpVote} handleDown = {handleDownVote} deletePost = {handleDelete} />
+        
+          </React.Fragment>
+        )} />
+        <Route path="/login" component={UserLogin} />
+        <Route path="/signup" component={UserSignup} />
+      </div>
+    </Router>
+    
   )
   
 }

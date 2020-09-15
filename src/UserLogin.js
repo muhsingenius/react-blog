@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {Form, Button, Row, Col} from 'react-bootstrap'
+import {Link } from 'react-router-dom';
+
 
 const formStyle = {
   width: '50%',
@@ -35,7 +37,9 @@ export default class UserSignup extends Component{
           <Button variant="primary" type="submit">
             Submit
           </Button>
+          <p>Not a member? <Link to="/signup">Signup</Link></p>
         </Form>
+        
       </div>
     )
   }
