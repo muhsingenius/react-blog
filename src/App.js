@@ -37,6 +37,11 @@ function App() {
     post.downVotes = post.downVotes + 1
     setPosts(newPost)
   }
+
+  function handleDelete(id){
+    const newPost= [...posts.filter(post => post.id !== id)]
+    setPosts(newPost)
+  }
   
   function handleAddPost(e){
     const title = postTitleRef.current.value
@@ -62,7 +67,8 @@ function App() {
               </div>
               <button className="btn btn-primary" onClick={handleAddPost}>Submit</button>
           </form>
-      <BlogPosts posts={posts} handleUp = {handleUpVote} handleDown = {handleDownVote}/>
+          <h2 style={{textAlign: 'center'}}>Blog Posts</h2>
+      <BlogPosts posts={posts} handleUp = {handleUpVote} handleDown = {handleDownVote} deletePost = {handleDelete} />
       
     </div>
   )

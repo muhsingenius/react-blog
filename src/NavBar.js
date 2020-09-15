@@ -11,7 +11,7 @@ export default class NavBar extends Component{
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Add New Post</Nav.Link>
+            <Button href="#link">Add New Post</Button>
           </Nav>
           <Form inline>
             <Button variant="outline-success">Sign Up</Button>
